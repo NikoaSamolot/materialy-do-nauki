@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edu Brainverse</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        /* ===== HEADER ===== */
+
+        header {
+            background: #17365d;
+            color: white;
+            border-bottom: 4px solid #0f2744;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 22px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            color: #17365d;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo h1 {
+            font-size: 25px;
+            margin-bottom: 3px;
+        }
+
+        .logo p {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+
+        .school-label {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        /* ===== MAIN ===== */
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 35px 25px 60px;
+        }
+
+        .welcome {
+            background: white;
+            border: 1px solid #dce1e7;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            color: #17365d;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ===== SUBJECTS ===== */
+
+        .subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .subject-button {
+            border: 1px solid #d4dbe3;
+            background: white;
+            padding: 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            color: #333;
+            transition: 0.15s;
+        }
+
+        .subject-button:hover {
+            border-color: #17365d;
+            background: #f7f9fc;
+        }
+
+        .subject-button.active {
+            background: #17365d;
+            color: white;
+            border-color: #17365d;
+        }
+
+        .subject-icon {
+            display: inline-flex;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            background: #edf1f6;
+            color: #17365d;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+        }
+
+        .subject-button.active .subject-icon {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* ===== MATERIALS ===== */
+
+        .materials-box {
+            background: white;
+            border: 1px solid #dce1e7;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .materials-header {
+            background: #f0f3f7;
+            border-bottom: 1px solid #dce1e7;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .materials-header h2 {
+            color: #17365d;
+            font-size: 20px;
+        }
+
+        .materials-count {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .materials-list {
+            list-style: none;
+        }
+
+        .material {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 17px 22px;
+            border-bottom: 1px solid #e8ebef;
+        }
+
+        .material:last-child {
+            border-bottom: none;
+        }
+
+        .material:hover {
+            background: #fafbfc;
+        }
+
+        .material-info {
+            min-width: 0;
+        }
+
+        .material-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .material-description {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .material-link {
+            flex-shrink: 0;
+            text-decoration: none;
+            background: #17365d;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .material-link:hover {
+            background: #0f2744;
+        }
+
+        .empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: #777;
+        }
+
+        /* ===== FOOTER ===== */
+
+        footer {
+            background: #17365d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+        }
+
+        footer span {
+            opacity: 0.7;
+        }
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 650px) {
+
+            .header-inner {
+                padding: 18px;
+            }
+
+            .school-label {
+                display: none;
+            }
+
+            main {
+                padding: 20px 15px 40px;
+            }
+
+            .material {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .material-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            .subjects {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <div class="logo">
+            <div class="logo-icon">E</div>
+
+            <div>
+                <h1>Edu Brainverse</h1>
+                <p>Materiały edukacyjne</p>
+            </div>
+        </div>
+
+        <div class="school-label">
+            Baza materiałów do nauki
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+    <section class="welcome">
+        <h2>Materiały edukacyjne</h2>
+
+        <p>
+            Wybierz przedmiot, aby zobaczyć dostępne materiały
+            do nauki, powtórek i przygotowania do sprawdzianów.
+        </p>
+    </section>
+
+
+    <!-- PRZEDMIOTY -->
+
+    <div class="subjects" id="subjects"></div>
+
+
+    <!-- MATERIAŁY -->
+
+    <section class="materials-box">
+
+        <div class="materials-header">
+
+            <h2 id="materials-title">
+                Wybierz przedmiot
+            </h2>
+
+            <span class="materials-count" id="materials-count"></span>
+
+        </div>
+
+        <ul class="materials-list" id="materials-list">
+            <li class="empty">
+                Wybierz przedmiot powyżej, aby wyświetlić materiały.
+            </li>
+        </ul>
+
+    </section>
+
+</main>
+
+
+<footer>
+    Edu Brainverse &nbsp;•&nbsp; <span>Materiały edukacyjne</span>
+</footer>
+
+
+<!-- NAJPIERW DANE, POTEM SKRYPT -->
+
+<script src="materials.js"></script>
+
+<script>
+
+    const subjectsContainer = document.getElementById("subjects");
+    const materialsList = document.getElementById("materials-list");
+    const materialsTitle = document.getElementById("materials-title");
+    const materialsCount = document.getElementById("materials-count");
+
+    let currentSubject = null;
+
+
+    // ==========================================
+    // TWORZENIE LISTY PRZEDMIOTÓW
+    // ==========================================
+
+    function createSubjects() {
+
+        subjectsContainer.innerHTML = "";
+
+        for (const subject of subjects) {
+
+            const button = document.createElement("button");
+
+            button.className = "subject-button";
+
+            button.innerHTML = `
+                <span class="subject-icon">${subject.icon}</span>
+                ${subject.name}
+            `;
+
+            button.onclick = () => {
+                selectSubject(subject.id, button);
+            };
+
+            subjectsContainer.appendChild(button);
+        }
+    }
+
+
+    // ==========================================
+    // WYBÓR PRZEDMIOTU
+    // ==========================================
+
+    function selectSubject(subjectId, clickedButton) {
+
+        currentSubject = subjectId;
+
+        document
+            .querySelectorAll(".subject-button")
+            .forEach(button => {
+                button.classList.remove("active");
+            });
+
+        clickedButton.classList.add("active");
+
+        const subject = subjects.find(
+            item => item.id === subjectId
+        );
+
+        const materials = materialsData[subjectId] || [];
+
+        materialsTitle.textContent = subject.name;
+
+        materialsCount.textContent =
+            `${materials.length} ${materials.length === 1 ? "materiał" : "materiałów"}`;
+
+        materialsList.innerHTML = "";
+
+        if (materials.length === 0) {
+
+            materialsList.innerHTML = `
+                <li class="empty">
+                    Brak materiałów dla tego przedmiotu.
+                </li>
+            `;
+
+            return;
+        }
+
+
+        // ==========================================
+        // TWORZENIE LISTY MATERIAŁÓW
+        // ==========================================
+
+        materials.forEach(material => {
+
+            const li = document.createElement("li");
+
+            li.className = "material";
+
+            li.innerHTML = `
+                <div class="material-info">
+
+                    <div class="material-title">
+                        ${material.title}
+                    </div>
+
+                    ${
+                        material.description
+                        ? `<div class="material-description">
+                            ${material.description}
+                           </div>`
+                        : ""
+                    }
+
+                </div>
+
+                <a
+                    class="material-link"
+                    href="${material.url}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Otwórz materiał
+                </a>
+            `;
+
+            materialsList.appendChild(li);
+
+        });
+
+    }
+
+
+    // ==========================================
+    // START
+    // ==========================================
+
+    createSubjects();
+
+</script>
+
+</body>
+</html>
