@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Historia — Powtórka do kartkówki</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #ead9bd 0, transparent 35%),
+        radial-gradient(circle at bottom right, #d8c09c 0, transparent 30%),
+        #f4efe6;
+    color: #29231e;
+}
+
+/* HEADER */
+
+header {
+    background:
+        linear-gradient(rgba(45,29,20,.88), rgba(45,29,20,.92)),
+        repeating-linear-gradient(
+            45deg,
+            #3b281d,
+            #3b281d 10px,
+            #342218 10px,
+            #342218 20px
+        );
+    color: white;
+    text-align: center;
+    padding: 65px 20px 55px;
+    border-bottom: 6px solid #a8793d;
+}
+
+header h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(35px, 7vw, 70px);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+header p {
+    font-size: 19px;
+    color: #e9d8c2;
+    margin-top: 15px;
+}
+
+/* NAV */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(38,28,22,.96);
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 15px #0005;
+}
+
+nav a {
+    color: #f8ead8;
+    text-decoration: none;
+    background: #5b3b29;
+    padding: 9px 13px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: .2s;
+}
+
+nav a:hover {
+    background: #8c6038;
+}
+
+/* MAIN */
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 15px 80px;
+}
+
+section {
+    background: rgba(255,255,255,.92);
+    border: 1px solid #d8cbb9;
+    border-radius: 16px;
+    padding: 28px;
+    margin: 25px 0;
+    box-shadow: 0 5px 20px #49311d15;
+}
+
+h2 {
+    font-family: Georgia, serif;
+    color: #683b22;
+    border-bottom: 3px solid #c49a62;
+    padding-bottom: 9px;
+}
+
+h3 {
+    color: #74472b;
+}
+
+/* IMPORTANT DATES */
+
+.timeline {
+    position: relative;
+    margin: 30px 0;
+    padding-left: 25px;
+    border-left: 4px solid #a8793d;
+}
+
+.event {
+    position: relative;
+    margin: 20px 0;
+    padding: 15px 18px;
+    background: #faf6ee;
+    border: 1px solid #dfd2bf;
+    border-radius: 10px;
+}
+
+.event::before {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    background: #a8793d;
+    border-radius: 50%;
+    left: -33px;
+    top: 20px;
+    border: 3px solid #f4efe6;
+}
+
+.year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #7b431f;
+}
+
+.event strong {
+    display: block;
+    margin-top: 3px;
+}
+
+/* TABLE */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd0bd;
+    padding: 11px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #573a28;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #faf7f0;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: #713e21;
+}
+
+/* CARDS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: #faf6ee;
+    border: 1px solid #ddcdb7;
+    border-radius: 12px;
+    padding: 18px;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px #49311d22;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+/* DYNASTY COLORS */
+
+.dynasty {
+    border-left: 6px solid #8b5a32;
+}
+
+.piast {
+    border-left-color: #a14c35;
+}
+
+.jagiellon {
+    border-left-color: #496b3c;
+}
+
+.waza {
+    border-left-color: #3d608c;
+}
+
+.elekcyjni {
+    border-left-color: #815c96;
+}
+
+/* SPECIAL */
+
+.warning {
+    background: #fff3d6;
+    border: 1px solid #e1b966;
+    padding: 17px;
+    border-radius: 10px;
+}
+
+.tip {
+    background: #e8f0e2;
+    border: 1px solid #9bb58e;
+    padding: 17px;
+    border-radius: 10px;
+}
+
+.big-number {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #713e21;
+}
+
+/* CALCULATOR */
+
+.calculator {
+    background: #2e241e;
+    color: white;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.calculator input {
+    width: 45%;
+    min-width: 120px;
+    padding: 12px;
+    border: 0;
+    border-radius: 7px;
+    font-size: 18px;
+}
+
+button {
+    border: 0;
+    border-radius: 8px;
+    padding: 11px 17px;
+    background: #a96f38;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #c18449;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+/* QUIZ */
+
+.question {
+    background: #faf6ee;
+    border: 1px solid #ddd0bd;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+.question button {
+    margin: 5px 5px 0 0;
+}
+
+.quiz-result {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* QUICK */
+
+.quick {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px,1fr));
+    gap: 10px;
+}
+
+.quick div {
+    text-align: center;
+    padding: 15px;
+    background: #f4e9d6;
+    border-radius: 10px;
+}
+
+.quick b {
+    display: block;
+    font-size: 23px;
+    color: #713e21;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    background: #2d211b;
+    color: #d9c8b6;
+    padding: 35px;
+}
+
+/* MOBILE */
+
+@media(max-width:650px) {
+    section {
+        padding: 18px;
+    }
+
+    header {
+        padding: 45px 15px;
+    }
+
+    .calculator input {
+        width: 100%;
+        margin-bottom: 7px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚔️ HISTORIA</h1>
+    <p>Kompletna powtórka do kartkówki z chronologii</p>
+    <p>Daty • Królowie • Dynastie • Liczenie lat • Quiz</p>
+</header>
+
+<nav>
+    <a href="#najwazniejsze">⭐ Najważniejsze</a>
+    <a href="#daty">📜 Daty</a>
+    <a href="#krolowie">👑 Królowie</a>
+    <a href="#dynastie">🏰 Dynastie</a>
+    <a href="#liczenie">🧮 Liczenie</a>
+    <a href="#quiz">🎯 Quiz</a>
+</nav>
+
+<main>
+
+<!-- NAJWAŻNIEJSZE -->
+
+<section id="najwazniejsze">
+
+<h2>⭐ Jeśli masz mało czasu — ucz się tego</h2>
+
+<div class="warning">
+<b>Nie próbuj zapamiętać całej strony jednego wieczoru.</b>
+Najpierw opanuj poniższą oś. To są daty, które dają Ci szkielet chronologii.
+</div>
+
+<div class="quick">
+
+<div><b>966</b>chrzest Polski</div>
+<div><b>1000</b>zjazd gnieźnieński</div>
+<div><b>1025</b>Chrobry</div>
+<div><b>1138</b>rozbicie dzielnicowe</div>
+<div><b>1226</b>Krzyżacy</div>
+<div><b>1410</b>Grunwald</div>
+<div><b>1453</b>Konstantynopol</div>
+<div><b>1492</b>Kolumb</div>
+<div><b>1517</b>reformacja</div>
+<div><b>1569</b>unia lubelska</div>
+<div><b>1683</b>Wiedeń</div>
+<div><b>1772</b>I rozbiór</div>
+<div><b>1789</b>rewolucja francuska</div>
+<div><b>1791</b>Konstytucja 3 maja</div>
+<div><b>1795</b>III rozbiór</div>
+<div><b>1807</b>Księstwo Warszawskie</div>
+<div><b>1815</b>kongres wiedeński</div>
+<div><b>1830</b>powstanie listopadowe</div>
+<div><b>1863</b>powstanie styczniowe</div>
+<div><b>1914</b>I wojna</div>
+<div><b>1918</b>niepodległość</div>
+<div><b>1920</b>Bitwa Warszawska</div>
+<div><b>1939</b>II wojna</div>
+<div><b>1945</b>koniec II wojny</div>
+<div><b>1980</b>Solidarność</div>
+<div><b>1989</b>koniec komunizmu</div>
+<div><b>1991</b>rozpad ZSRR</div>
+<div><b>1999</b>NATO</div>
+<div><b>2004</b>UE</div>
+
+</div>
+
+<div class="tip">
+<b>Trik:</b> spróbuj powiedzieć wydarzenie, patrząc na rok.
+Potem odwrotnie — zobacz wydarzenie i przypomnij sobie rok.
+</div>
+
+</section>
+
+
+<!-- DATY -->
+
+<section id="daty">
+
+<h2>📜 Najważniejsze daty — chronologicznie</h2>
+
+<div class="timeline">
+
+<div class="event"><span class="year">753 p.n.e.</span><strong>Tradycyjna data założenia Rzymu</strong></div>
+
+<div class="event"><span class="year">509 p.n.e.</span><strong>Początek republiki rzymskiej</strong></div>
+
+<div class="event"><span class="year">490 p.n.e.</span><strong>Bitwa pod Maratonem</strong></div>
+
+<div class="event"><span class="year">480 p.n.e.</span><strong>Termopile i bitwa pod Salaminą</strong></div>
+
+<div class="event"><span class="year">44 p.n.e.</span><strong>Zabójstwo Juliusza Cezara</strong></div>
+
+<div class="event"><span class="year">27 p.n.e.</span><strong>Początek cesarstwa rzymskiego</strong></div>
+
+<div class="event"><span class="year">476</span><strong>Upadek cesarstwa zachodniorzymskiego</strong></div>
+
+<div class="event"><span class="year">622</span><strong>Hidżra Mahometa — początek ery muzułmańskiej</strong></div>
+
+<div class="event"><span class="year">800</span><strong>Koronacja Karola Wielkiego na cesarza</strong></div>
+
+<div class="event"><span class="year">843</span><strong>Traktat w Verdun</strong></div>
+
+<div class="event"><span class="year">966</span><strong>Chrzest Polski</strong></div>
+
+<div class="event"><span class="year">1000</span><strong>Zjazd gnieźnieński</strong></div>
+
+<div class="event"><span class="year">1025</span><strong>Koronacja Bolesława Chrobrego</strong></div>
+
+<div class="event"><span class="year">1054</span><strong>Wielka schizma wschodnia</strong></div>
+
+<div class="event"><span class="year">1138</span><strong>Testament Bolesława Krzywoustego i początek rozbicia dzielnicowego</strong></div>
+
+<div class="event"><span class="year">1226</span><strong>Sprowadzenie Krzyżaków do Polski</strong></div>
+
+<div class="event"><span class="year">1241</span><strong>Bitwa pod Legnicą</strong></div>
+
+<div class="event"><span class="year">1295</span><strong>Koronacja Przemysła II</strong></div>
+
+<div class="event"><span class="year">1320</span><strong>Koronacja Władysława Łokietka — zjednoczenie Polski</strong></div>
+
+<div class="event"><span class="year">1333</span><strong>Początek panowania Kazimierza Wielkiego</strong></div>
+
+<div class="event"><span class="year">1364</span><strong>Założenie Akademii Krakowskiej</strong></div>
+
+<div class="event"><span class="year">1385</span><strong>Unia w Krewie</strong></div>
+
+<div class="event"><span class="year">1410</span><strong>Bitwa pod Grunwaldem</strong></div>
+
+<div class="event"><span class="year">1453</span><strong>Upadek Konstantynopola</strong></div>
+
+<div class="event"><span class="year">1492</span><strong>Wyprawa Krzysztofa Kolumba</strong></div>
+
+<div class="event"><span class="year">1517</span><strong>Wystąpienie Marcina Lutra — początek reformacji</strong></div>
+
+<div class="event"><span class="year">1543</span><strong>Publikacja dzieła Kopernika o heliocentryzmie</strong></div>
+
+<div class="event"><span class="year">1569</span><strong>Unia lubelska — Rzeczpospolita Obojga Narodów</strong></div>
+
+<div class="event"><span class="year">1573</span><strong>Pierwsza wolna elekcja</strong></div>
+
+<div class="event"><span class="year">1683</span><strong>Odsiecz wiedeńska Jana III Sobieskiego</strong></div>
+
+<div class="event"><span class="year">1772</span><strong>I rozbiór Polski</strong></div>
+
+<div class="event"><span class="year">1776</span><strong>Deklaracja Niepodległości USA</strong></div>
+
+<div class="event"><span class="year">1789</span><strong>Wybuch rewolucji francuskiej</strong></div>
+
+<div class="event"><span class="year">1791</span><strong>Konstytucja 3 maja</strong></div>
+
+<div class="event"><span class="year">1793</span><strong>II rozbiór Polski</strong></div>
+
+<div class="event"><span class="year">1794</span><strong>Insurekcja kościuszkowska</strong></div>
+
+<div class="event"><span class="year">1795</span><strong>III rozbiór Polski</strong></div>
+
+<div class="event"><span class="year">1807</span><strong>Utworzenie Księstwa Warszawskiego</strong></div>
+
+<div class="event"><span class="year">1815</span><strong>Kongres wiedeński</strong></div>
+
+<div class="event"><span class="year">1830</span><strong>Wybuch powstania listopadowego</strong></div>
+
+<div class="event"><span class="year">1848</span><strong>Wiosna Ludów</strong></div>
+
+<div class="event"><span class="year">1863</span><strong>Wybuch powstania styczniowego</strong></div>
+
+<div class="event"><span class="year">1871</span><strong>Zjednoczenie Niemiec</strong></div>
+
+<div class="event"><span class="year">1914</span><strong>Wybuch I wojny światowej</strong></div>
+
+<div class="event"><span class="year">1917</span><strong>Rewolucje w Rosji</strong></div>
+
+<div class="event"><span class="year">1918</span><strong>Odzyskanie niepodległości przez Polskę i koniec I wojny światowej</strong></div>
+
+<div class="event"><span class="year">1919</span><strong>Traktat wersalski</strong></div>
+
+<div class="event"><span class="year">1920</span><strong>Bitwa Warszawska</strong></div>
+
+<div class="event"><span class="year">1922</span><strong>Powstanie ZSRR</strong></div>
+
+<div class="event"><span class="year">1926</span><strong>Przewrót majowy</strong></div>
+
+<div class="event"><span class="year">1929</span><strong>Wielki kryzys gospodarczy</strong></div>
+
+<div class="event"><span class="year">1933</span><strong>Hitler zostaje kanclerzem Niemiec</strong></div>
+
+<div class="event"><span class="year">1939</span><strong>Wybuch II wojny światowej</strong></div>
+
+<div class="event"><span class="year">1944</span><strong>Powstanie warszawskie</strong></div>
+
+<div class="event"><span class="year">1945</span><strong>Koniec II wojny światowej i powstanie ONZ</strong></div>
+
+<div class="event"><span class="year">1949</span><strong>Powstanie NATO</strong></div>
+
+<div class="event"><span class="year">1955</span><strong>Układ Warszawski</strong></div>
+
+<div class="event"><span class="year">1956</span><strong>Poznański Czerwiec i Polski Październik</strong></div>
+
+<div class="event"><span class="year">1961</span><strong>Gagarin w kosmosie; budowa muru berlińskiego</strong></div>
+
+<div class="event"><span class="year">1962</span><strong>Kryzys kubański</strong></div>
+
+<div class="event"><span class="year">1969</span><strong>Pierwsze lądowanie człowieka na Księżycu</strong></div>
+
+<div class="event"><span class="year">1978</span><strong>Karol Wojtyła zostaje papieżem</strong></div>
+
+<div class="event"><span class="year">1980</span><strong>Powstanie Solidarności</strong></div>
+
+<div class="event"><span class="year">1981</span><strong>Stan wojenny w Polsce</strong></div>
+
+<div class="event"><span class="year">1989</span><strong>Okrągły Stół, wybory 4 czerwca, początek przemian ustrojowych</strong></div>
+
+<div class="event"><span class="year">1991</span><strong>Rozpad ZSRR</strong></div>
+
+<div class="event"><span class="year">1999</span><strong>Polska w NATO</strong></div>
+
+<div class="event"><span class="year">2004</span><strong>Polska w Unii Europejskiej</strong></div>
+
+<div class="event"><span class="year">2020</span><strong>Pandemia COVID-19</strong></div>
+
+<div class="event"><span class="year">2022</span><strong>Pełnoskalowa inwazja Rosji na Ukrainę</strong></div>
+
+</div>
+</section>
+
+
+<!-- KRÓLOWIE -->
+
+<section id="krolowie">
+
+<h2>👑 Królowie i najważniejsi władcy Polski</h2>
+
+<div class="warning">
+<b>Ważne:</b> „król Polski” i „władca Polski” to nie zawsze to samo.
+W okresie książęcym Polska miała władców, którzy nie byli koronowanymi królami.
+Podczas rozbicia dzielnicowego sytuacja była szczególnie skomplikowana.
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Dynastia / ród</th>
+<th>Władca</th>
+<th>Panowanie</th>
+<th>Co kojarzyć?</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Piastowie</td>
+<td>Mieszko I</td>
+<td>ok. 960–992</td>
+<td>Chrzest Polski 966</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Bolesław I Chrobry</td>
+<td>992–1025</td>
+<td>Pierwszy król Polski, koronacja 1025</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Mieszko II Lambert</td>
+<td>1025–1034</td>
+<td>Król Polski</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Kazimierz I Odnowiciel</td>
+<td>1034–1058</td>
+<td>Odbudowa państwa</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Bolesław II Śmiały</td>
+<td>1058–1079</td>
+<td>Koronacja 1076</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Władysław I Herman</td>
+<td>1079–1102</td>
+<td>Książę</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Bolesław III Krzywousty</td>
+<td>1102–1138</td>
+<td>Testament 1138</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Przemysł II</td>
+<td>1295–1296</td>
+<td>Koronacja 1295</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Władysław I Łokietek</td>
+<td>1306–1333</td>
+<td>Koronacja 1320, zjednoczenie kraju</td>
+</tr>
+
+<tr>
+<td>Piastowie</td>
+<td>Kazimierz III Wielki</td>
+<td>1333–1370</td>
+<td>Ostatni król z dynastii Piastów</td>
+</tr>
+
+<tr>
+<td>Andegawenowie</td>
+<td>Ludwik Węgierski</td>
+<td>1370–1382</td>
+<td>Przywilej koszycki</td>
+</tr>
+
+<tr>
+<td>Andegawenowie</td>
+<td>Jadwiga</td>
+<td>1384–1399</td>
+<td>Król Polski; unia z Litwą</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Władysław II Jagiełło</td>
+<td>1386–1434</td>
+<td>Grunwald 1410</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Władysław III Warneńczyk</td>
+<td>1434–1444</td>
+<td>Bitwa pod Warną 1444</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Kazimierz IV Jagiellończyk</td>
+<td>1447–1492</td>
+<td>II pokój toruński 1466</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Jan I Olbracht</td>
+<td>1492–1501</td>
+<td>Wojna z Turkami; powiedzenie o szlachcie</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Aleksander Jagiellończyk</td>
+<td>1501–1506</td>
+<td>Nihil novi 1505</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Zygmunt I Stary</td>
+<td>1506–1548</td>
+<td>Renesans, hołd pruski 1525</td>
+</tr>
+
+<tr>
+<td>Jagiellonowie</td>
+<td>Zygmunt II August</td>
+<td>1548–1572</td>
+<td>Unia lubelska 1569; ostatni Jagiellon</td>
+</tr>
+
+<tr>
+<td>Walezjuszowie</td>
+<td>Henryk Walezy</td>
+<td>1573–1574</td>
+<td>Pierwszy król elekcyjny</td>
+</tr>
+
+<tr>
+<td>Batory</td>
+<td>Stefan Batory</td>
+<td>1576–1586</td>
+<td>Wojny z Moskwą</td>
+</tr>
+
+<tr>
+<td>Wazowie</td>
+<td>Zygmunt III Waza</td>
+<td>1587–1632</td>
+<td>Przeniesienie stolicy do Warszawy</td>
+</tr>
+
+<tr>
+<td>Wazowie</td>
+<td>Władysław IV Waza</td>
+<td>1632–1648</td>
+<td>Wojny XVII wieku</td>
+</tr>
+
+<tr>
+<td>Wazowie</td>
+<td>Jan II Kazimierz Waza</td>
+<td>1648–1668</td>
+<td>Potop szwedzki</td>
+</tr>
+
+<tr>
+<td>Wiśniowiecki</td>
+<td>Michał Korybut Wiśniowiecki</td>
+<td>1669–1673</td>
+<td>Król elekcyjny</td>
+</tr>
+
+<tr>
+<td>Sobiescy</td>
+<td>Jan III Sobieski</td>
+<td>1674–1696</td>
+<td>Wiedeń 1683</td>
+</tr>
+
+<tr>
+<td>Wettynowie</td>
+<td>August II Mocny</td>
+<td>1697–1706; 1709–1733</td>
+<td>Unia personalna z Saksonią</td>
+</tr>
+
+<tr>
+<td>Leszczyńscy</td>
+<td>Stanisław Leszczyński</td>
+<td>1704–1709; 1733–1736</td>
+<td>Król w okresie rywalizacji o tron</td>
+</tr>
+
+<tr>
+<td>Wettynowie</td>
+<td>August III Sas</td>
+<td>1733–1763</td>
+<td>Rządy Wettinów</td>
+</tr>
+
+<tr>
+<td>Stanisław August</td>
+<td>Stanisław August Poniatowski</td>
+<td>1764–1795</td>
+<td>Konstytucja 3 maja; ostatni król Polski</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</section>
+
+
+<!-- DYNASTIE -->
+
+<section id="dynastie">
+
+<h2>🏰 Dynastie — zapamiętaj kolejność</h2>
+
+<div class="grid">
+
+<div class="card dynasty piast">
+<h3>🟥 Piastowie</h3>
+<p>Najstarsza polska dynastia.</p>
+<p><b>Najważniejsi:</b> Mieszko I, Bolesław Chrobry, Kazimierz Wielki.</p>
+<p><b>Koronowani:</b> Chrobry, Mieszko II, Bolesław Śmiały, Przemysł II, Łokietek, Kazimierz Wielki.</p>
+</div>
+
+<div class="card dynasty">
+<h3>🟫 Andegawenowie</h3>
+<p><b>1370–1382:</b> Ludwik Węgierski</p>
+<p><b>1384–1399:</b> Jadwiga</p>
+<p>Jadwiga poślubiła Jagiełłę.</p>
+</div>
+
+<div class="card dynasty jagiellon">
+<h3>🟩 Jagiellonowie</h3>
+<p><b>1386–1572</b></p>
+<p>Jagiełło → Warneńczyk → Kazimierz Jagiellończyk → Jan Olbracht → Aleksander → Zygmunt Stary → Zygmunt August.</p>
+</div>
+
+<div class="card dynasty elekcyjni">
+<h3>🟪 Królowie elekcyjni</h3>
+<p>Po śmierci Zygmunta II Augusta w 1572 roku zaczyna się okres wolnej elekcji.</p>
+<p>Każdy kolejny król pochodził z wybranego rodu.</p>
+</div>
+
+<div class="card dynasty waza">
+<h3>🟦 Wazowie</h3>
+<p><b>1587–1668</b></p>
+<p>Zygmunt III Waza → Władysław IV → Jan II Kazimierz.</p>
+</div>
+
+<div class="card dynasty">
+<h3>🟫 Wettinowie</h3>
+<p>August II Mocny i August III Sas.</p>
+<p><b>1697–1763</b> z przerwą na panowanie Stanisława Leszczyńskiego.</p>
+</div>
+
+</div>
+
+<h3>🔥 Najważniejsza kolejność</h3>
+
+<div class="tip">
+<b>Piastowie → Andegawenowie → Jagiellonowie → Władcy elekcyjni</b>
+<br><br>
+A wśród elekcyjnych szczególnie pamiętaj:
+<br>
+<b>Walezy → Batory → Wazowie → Wiśniowiecki → Sobieski → Wettinowie → Leszczyński → Wettinowie → Poniatowski</b>
+</div>
+
+</section>
+
+
+<!-- ZADANIA DYNASTYCZNE -->
+
+<section>
+
+<h2>🧠 Zadania typu „ile lat panowała dynastia?”</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Piastowie — najprostszy wariant</h3>
+<p>Koronacja Chrobrego: <b>1025</b></p>
+<p>Śmierć Kazimierza Wielkiego: <b>1370</b></p>
+<p class="big-number">1370 − 1025 = 345</p>
+<p>Odpowiedź: <b>345 lat</b></p>
+</div>
+
+<div class="card">
+<h3>Jagiellonowie</h3>
+<p>Koronacja Jagiełły: <b>1386</b></p>
+<p>Śmierć Zygmunta Augusta: <b>1572</b></p>
+<p class="big-number">1572 − 1386 = 186</p>
+<p>Odpowiedź: <b>186 lat</b></p>
+</div>
+
+<div class="card">
+<h3>Rozbiory</h3>
+<p>I rozbiór: <b>1772</b></p>
+<p>III rozbiór: <b>1795</b></p>
+<p class="big-number">1795 − 1772 = 23</p>
+<p>Odpowiedź: <b>23 lata</b></p>
+</div>
+
+<div class="card">
+<h3>II wojna światowa</h3>
+<p>Początek: <b>1939</b></p>
+<p>Koniec: <b>1945</b></p>
+<p class="big-number">1945 − 1939 = 6</p>
+<p>Odpowiedź: <b>6 lat</b></p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CALCULATOR -->
+
+<section id="liczenie">
+
+<h2>🧮 Kalkulator różnicy lat</h2>
+
+<div class="calculator">
+
+<p>Wpisz dwie daty. Kalkulator policzy różnicę.</p>
+
+<input id="year1" type="number" placeholder="np. 1386">
+
+<input id="year2" type="number" placeholder="np. 1572">
+
+<br>
+
+<button onclick="calculateYears()">POLICZ</button>
+
+<div id="calcResult" class="result"></div>
+
+</div>
+
+<h3>⚠️ Uwaga na p.n.e.</h3>
+
+<p>
+Jeżeli masz np. <b>100 p.n.e.</b> i <b>50 p.n.e.</b>,
+różnica wynosi 50 lat.
+</p>
+
+<p>
+Przy przejściu przez erę p.n.e. trzeba pamiętać,
+że nie ma roku zerowego.
+</p>
+
+</section>
+
+
+<!-- ŚWIAT -->
+
+<section>
+
+<h2>🌍 Historia świata — szybka ściąga</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🏛️ Starożytność</h3>
+<p><b>753 p.n.e.</b> — Rzym</p>
+<p><b>490 p.n.e.</b> — Maraton</p>
+<p><b>480 p.n.e.</b> — Termopile</p>
+<p><b>44 p.n.e.</b> — śmierć Cezara</p>
+<p><b>27 p.n.e.</b> — cesarstwo</p>
+<p><b>476</b> — upadek Rzymu Zachodniego</p>
+</div>
+
+<div class="card">
+<h3>🏰 Średniowiecze</h3>
+<p><b>622</b> — hidżra</p>
+<p><b>800</b> — Karol Wielki</p>
+<p><b>1054</b> — schizma</p>
+<p><b>1096</b> — I krucjata</p>
+<p><b>1453</b> — Konstantynopol</p>
+</div>
+
+<div class="card">
+<h3>🧭 Nowożytność</h3>
+<p><b>1492</b> — Kolumb</p>
+<p><b>1517</b> — reformacja</p>
+<p><b>1776</b> — USA</p>
+<p><b>1789</b> — rewolucja francuska</p>
+</div>
+
+<div class="card">
+<h3>🌎 XIX wiek</h3>
+<p><b>1804</b> — Napoleon cesarzem</p>
+<p><b>1815</b> — kongres wiedeński</p>
+<p><b>1848</b> — Wiosna Ludów</p>
+<p><b>1871</b> — zjednoczenie Niemiec</p>
+</div>
+
+<div class="card">
+<h3>💣 XX wiek</h3>
+<p><b>1914–1918</b> — I wojna światowa</p>
+<p><b>1939–1945</b> — II wojna światowa</p>
+<p><b>1949</b> — NATO</p>
+<p><b>1969</b> — Księżyc</p>
+<p><b>1989</b> — upadek komunizmu w Europie Środkowej</p>
+</div>
+
+<div class="card">
+<h3>🌐 XXI wiek</h3>
+<p><b>2001</b> — zamachy 11 września</p>
+<p><b>2004</b> — Polska w UE</p>
+<p><b>2020</b> — pandemia COVID-19</p>
+<p><b>2022</b> — pełnoskalowa inwazja Rosji na Ukrainę</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GRAFIKA -->
+
+<section>
+
+<h2>🎨 Wizualna oś czasu</h2>
+
+<div style="
+overflow-x:auto;
+padding:25px 0;
+">
+
+<div style="
+min-width:950px;
+display:flex;
+align-items:center;
+gap:0;
+">
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">🏛️</div>
+<b>476</b><br>
+Rzym
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">✝️</div>
+<b>966</b><br>
+Polska
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">⚔️</div>
+<b>1410</b><br>
+Grunwald
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">⛵</div>
+<b>1492</b><br>
+Kolumb
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">📜</div>
+<b>1791</b><br>
+Konstytucja
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">💥</div>
+<b>1939</b><br>
+II wojna
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">🕊️</div>
+<b>1989</b><br>
+Przemiany
+</div>
+
+<div style="height:5px;background:#9b7043;flex:1"></div>
+
+<div style="text-align:center;flex:1">
+<div style="font-size:40px">🇪🇺</div>
+<b>2004</b><br>
+UE
+</div>
+
+</div>
+</div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quiz">
+
+<h2>🎯 Quiz — sprawdź się</h2>
+
+<p>
+Kliknij odpowiedź. Na końcu zobaczysz wynik.
+</p>
+
+<div class="question">
+<b>1. W którym roku odbył się chrzest Polski?</b><br>
+<button onclick="answer(1,this,false)">1000</button>
+<button onclick="answer(1,this,true)">966</button>
+<button onclick="answer(1,this,false)">1025</button>
+</div>
+
+<div class="question">
+<b>2. W którym roku odbyła się bitwa pod Grunwaldem?</b><br>
+<button onclick="answer(2,this,false)">1385</button>
+<button onclick="answer(2,this,true)">1410</button>
+<button onclick="answer(2,this,false)">1453</button>
+</div>
+
+<div class="question">
+<b>3. Kto był pierwszym królem Polski?</b><br>
+<button onclick="answer(3,this,true)">Bolesław Chrobry</button>
+<button onclick="answer(3,this,false)">Mieszko I</button>
+<button onclick="answer(3,this,false)">Kazimierz Wielki</button>
+</div>
+
+<div class="question">
+<b>4. W którym roku upadło cesarstwo zachodniorzymskie?</b><br>
+<button onclick="answer(4,this,false)">410</button>
+<button onclick="answer(4,this,true)">476</button>
+<button onclick="answer(4,this,false)">622</button>
+</div>
+
+<div class="question">
+<b>5. W którym roku był I rozbiór Polski?</b><br>
+<button onclick="answer(5,this,true)">1772</button>
+<button onclick="answer(5,this,false)">1791</button>
+<button onclick="answer(5,this,false)">1795</button>
+</div>
+
+<div class="question">
+<b>6. W którym roku uchwalono Konstytucję 3 maja?</b><br>
+<button onclick="answer(6,this,false)">1776</button>
+<button onclick="answer(6,this,true)">1791</button>
+<button onclick="answer(6,this,false)">1795</button>
+</div>
+
+<div class="question">
+<b>7. W którym roku Polska odzyskała niepodległość?</b><br>
+<button onclick="answer(7,this,false)">1914</button>
+<button onclick="answer(7,this,true)">1918</button>
+<button onclick="answer(7,this,false)">1920</button>
+</div>
+
+<div class="question">
+<b>8. W którym roku rozpoczęła się II wojna światowa?</b><br>
+<button onclick="answer(8,this,true)">1939</button>
+<button onclick="answer(8,this,false)">1941</button>
+<button onclick="answer(8,this,false)">1945</button>
+</div>
+
+<div class="question">
+<b>9. W którym roku powstała Solidarność?</b><br>
+<button onclick="answer(9,this,false)">1978</button>
+<button onclick="answer(9,this,true)">1980</button>
+<button onclick="answer(9,this,false)">1989</button>
+</div>
+
+<div class="question">
+<b>10. W którym roku Polska weszła do Unii Europejskiej?</b><br>
+<button onclick="answer(10,this,false)">1999</button>
+<button onclick="answer(10,this,true)">2004</button>
+<button onclick="answer(10,this,false)">2007</button>
+</div>
+
+<button onclick="showScore()">POKAŻ WYNIK</button>
+
+<div id="quizResult" class="quiz-result"></div>
+
+</section>
+
+
+<!-- STRATEGIA -->
+
+<section>
+
+<h2>🧠 Jak się tego uczyć</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>1️⃣ Najpierw daty</h3>
+<p>
+Naucz się samego ciągu:
+</p>
+<p>
+<b>
+966 → 1000 → 1025 → 1138 → 1226 →
+1410 → 1453 → 1492 → 1517 → 1569 →
+1683 → 1772 → 1789 → 1791 → 1795
+</b>
+</p>
+</div>
+
+<div class="card">
+<h3>2️⃣ Potem królowie</h3>
+<p>
+Powtarzaj w kolejności:
+</p>
+<p>
+Chrobry → Łokietek → Kazimierz Wielki →
+Jagiełło → Warneńczyk → Kazimierz Jagiellończyk →
+Zygmunt Stary → Zygmunt August → Walezy →
+Batory → Wazowie → Sobieski → Poniatowski.
+</p>
+</div>
+
+<div class="card">
+<h3>3️⃣ Na końcu liczenie</h3>
+<p>
+Jeśli dostaniesz:
+</p>
+<p>
+<b>„Od 1386 do 1572?”</b>
+</p>
+<p>
+robisz:
+</p>
+<p class="big-number">1572 − 1386 = 186</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ŹRÓDŁA -->
+
+<section>
+
+<h2>📚 Źródła i uwagi</h2>
+
+<p>
+Zakres został przygotowany pod materiał historii szkoły podstawowej.
+Podstawa programowa obejmuje m.in. starożytność, średniowiecze,
+Piastów, Jagiellonów, odkrycia geograficzne, reformację,
+Rzeczpospolitą, rozbiory, epokę napoleońską, XIX i XX wiek. 
+</p>
+
+<p>
+Materiały edukacyjne ZPE wskazują m.in. 966 jako chrzest Polski,
+1025 jako koronację Bolesława Chrobrego, 1386 jako początek
+panowania Jagiellonów w Polsce oraz 1572 jako koniec tej dynastii
+na polskim tronie.
+</p>
+
+<p>
+<b>Uwaga:</b> zakres panowania niektórych średniowiecznych władców
+bywa podawany różnie w zależności od tego, czy źródło liczy objęcie
+władzy książęcej, czy koronację. Dlatego przy zadaniach nauczyciela
+najważniejsze będzie trzymanie się dat używanych na lekcjach.
+</p>
+
+</section>
+
+</main>
+
+<footer>
+    <b>HISTORIA — POWTÓRKA</b>
+    <br>
+    Daty • Królowie • Dynastie • Chronologia
+    <br><br>
+    Zrobione do nauki, a nie do cierpienia 💀
+</footer>
+
+
+<script>
+
+/* KALKULATOR */
+
+function calculateYears() {
+
+    const a = Number(document.getElementById("year1").value);
+    const b = Number(document.getElementById("year2").value);
+
+    const result = document.getElementById("calcResult");
+
+    if (!a || !b) {
+        result.innerHTML = "Wpisz obie daty.";
+        return;
+    }
+
+    const difference = Math.abs(b - a);
+
+    result.innerHTML =
+        `${Math.max(a,b)} − ${Math.min(a,b)} = <b>${difference} lat</b>`;
+}
+
+
+/* QUIZ */
+
+let score = 0;
+let answered = {};
+
+function answer(question, button, correct) {
+
+    if (answered[question]) {
+        return;
+    }
+
+    answered[question] = true;
+
+    if (correct) {
+        score++;
+        button.style.background = "#4d7b45";
+        button.innerHTML += " ✓";
+    } else {
+        button.style.background = "#91433b";
+        button.innerHTML += " ✗";
+    }
+}
+
+function showScore() {
+
+    const result = document.getElementById("quizResult");
+
+    result.innerHTML =
+        `Twój wynik: ${score}/10`;
+
+    if (score === 10) {
+        result.innerHTML += " 🏆 IDEALNIE";
+    } else if (score >= 8) {
+        result.innerHTML += " 🔥 Bardzo dobrze";
+    } else if (score >= 6) {
+        result.innerHTML += " 👍 Jest dobrze";
+    } else {
+        result.innerHTML += " 📚 Jeszcze jedna powtórka";
+    }
+}
+
+</script>
+
+</body>
+</html>
