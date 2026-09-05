@@ -149,7 +149,7 @@ const materialsData = {
         {
             title: "Historia Kompletna powtórka do kartkówki z chronologii",
             description: "Daty, Królowie, Dynastie, Liczenie lat, Quiz",
-            url: "https://example.com/starozytnosc"
+            url: "https://edu.brainverse.pl/historia-kartkowka-1/"
         }
 
     ],
